@@ -91,8 +91,8 @@ My Page
         <form>
             <input type="text" id="usr" />
             <input type="password" id="pwd" /> <br />
-            <input type="button" id="register" value = "REGISTER" onclick="account.register()"/>
-            <input type="button" id="login" value= "LOGIN" /><br />
+            <input type="button" id="register" value = "REGISTER" onclick="user.register()"/>
+            <input type="button" id="login" value= "LOGIN" onclick="user.login()"/><br />
             <input type="number" placeholder="KES...." id="inp" /><br />
             <input type = "button" id="depbtn" value= "DEPOSIT" onclick="transaction.deposit()" />
             <input type="button" id="withbtn" value="WITHDRAW" onclick="transaction.withdraw()" /><br />
@@ -103,13 +103,13 @@ My Page
             </pre>
             <script>
 			class Bank{
-                constructor(username,password){
-                this.username = document.getElementById("usr").value;
-                this.password = document.getElementById("pwd").value;
-                this.users = [];
+                constructor(){
+                    this.username = document.getElementById("usr").value;
+                    this.password = document.getElementById("pwd").value;
+                    this.users = [];
                 }
                 register(){
-                    if(this.username && this.password !== null){
+                    if(this.username !== null && this.password !== null){
                         let user = {username: this.username, password: this.password};
                         this.users.unshift(user);
                         alert("registered");
@@ -118,53 +118,47 @@ My Page
                     }
                 }
                 login(){
-                    if (users.includes(this.username, this.password) ){
-                        alert("Logged In");
-                    }
-                    else{
-                        alert("Invalid Username or Password");
-                    }
+                    console.log(this.users);
                 }
 
             }
             class Account extends Bank {
                 constructor(){
-                this.balance = 10000;
-                this.logs = [];
-                super(username, password);
-                this.username = username;
-                this.password = password;
+                    super();
+                    this.balance = 10000;
+                    this.logs = [];
+
                 }
                 makeid(length){
-                var result = '';
-                var characters = 'QWERTYUIOPASDFGHJKLZXCVBNM017258369';
-                var charactersLength = characters.length;
-                for (var i=0;i<length; i++){
-                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+                    var result = '';
+                    var characters = 'QWERTYUIOPASDFGHJKLZXCVBNM017258369';
+                    var charactersLength = characters.length;
+                    for (var i=0;i<length; i++){
+                    result += characters.charAt(Math.floor(Math.random() * charactersLength));
                 }
                 return result;
                 }
                 deposit(){
-                let deposited = Number(document.getElementById("inp").value);
-                    if(deposited>0){
-                            if (deposited<1000000){
-                                this.balance += deposited;
-                                let sdring = { accountHolder: this.username, transactionId: this.makeid(10), time : new Date(), depositAmount: deposited, currentBalance: this.balance};
-                                this.logs.unshift(sdring);
-                                document.forms[0].reset();
-                                let mess = document.getElementById('mes');
-                                mess.textContent = ('\n' + JSON.stringify(sdring, '\t', 2));
-                            }
-                            else{
-                                alert(" And You cannot deposit a Million or more shillings");
-                                document.forms[0].reset();
-                            }
+                    let deposited = Number(document.getElementById("inp").value);
+                        if(deposited>0){
+                                if (deposited<1000000){
+                                    this.balance += deposited;
+                                    let sdring = { transactionId: this.makeid(10), time : new Date(), depositAmount: deposited, currentBalance: this.balance};
+                                    this.logs.unshift(sdring);
+                                    document.forms[0].reset();
+                                    let mess = document.getElementById('mes');
+                                    mess.textContent = ('\n' + JSON.stringify(sdring, '\t', 2));
+                                }
+                                else{
+                                    alert(" And You cannot deposit a Million or more shillings");
+                                    document.forms[0].reset();
+                                }
+                        }
+                        else{
+                            alert("You cannot deposit a Negative Amount");
+                            document.forms[0].reset();
+                        }
                     }
-                    else{
-                        alert("You cannot deposit a Negative Amount");
-                        document.forms[0].reset();
-                    }
-                }
                 withdraw(){
                 let withdrawn = Number(document.getElementById("inp").value);
                     if (withdrawn>0){
