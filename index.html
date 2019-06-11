@@ -78,7 +78,10 @@
     cursor: pointer;
     }
     pre {
-    font-size: 3vw;
+    font-size: 3.5vw;
+    font-weight: bold;
+    text-align: center;
+
     }
 
 </style>
@@ -109,7 +112,7 @@ My Page
                     this.users = [];
                 }
                 register(){
-                    if(this.username !== null && this.password !== null){
+                    if(this.username != null && this.password != null){
                         let user = {username: this.username, password: this.password};
                         this.users.unshift(user);
                         alert("registered");
@@ -118,8 +121,10 @@ My Page
                     }
                 }
                 login(){
-                    console.log(this.users);
+                    this.users.includes(this.username) && this.users.includes(this.password);
+                        alert("Logged In");
                 }
+                
 
             }
             class Account extends Bank {
