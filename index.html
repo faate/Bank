@@ -5,10 +5,10 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <style>
     div {
-    background-color: #0076bc;
-    border: 1vw solid rgb(34, 87, 34);
-    padding: 5vw;
-    margin: 2vw;
+        background-color: #0076bc;
+        border: 1vw solid rgb(34, 87, 34);
+        padding: 5vw;
+        margin: 2vw;
     }
     form {
         text-align: center;
@@ -22,74 +22,60 @@
         width: 15vw;
     }
     input[type=number]{
-    width: 50vw;
-    height: 10vw;
-    padding: 0.5vw 0.5vw;
-    font-size: 10vw;
-    margin: 0.2vw 0.1vw;
-    display: inline-block;
-    border: 0.5vw solid #ccc;
-    border-radius: 0.5vw;
-    box-sizing: border-box;
+        width: 50vw;
+        height: 10vw;
+        padding: 0.5vw 0.5vw;
+        font-size: 10vw;
+        margin: 0.2vw 0.1vw;
+        display: inline-block;
+        border: 0.5vw solid #ccc;
+        border-radius: 0.5vw;
+        box-sizing: border-box;
     }
     input[id=depbtn] {
-    width: 30vw;
-    height: 15vw;
-    background-color: #4CAF50;
-    color: rgb(5, 12, 0);
-    font-weight: bold;
-    font-size: 5vw;
-    padding: 0.5vw;
-    margin: 0.5vw;
-    border: 3vw;
-    border-radius: 0.1vw;
-    cursor: pointer;
-    text-rendering: geometricPrecision; 
+        width: 30vw;
+        height: 15vw;
+        background-color: #4CAF50;
+        color: rgb(5, 12, 0);
+        font-weight: bold;
+        font-size: 5vw;
+        padding: 0.5vw;
+        margin: 0.5vw;
+        border: 3vw;
+        border-radius: 0.1vw;
+        cursor: pointer;
+        text-rendering: geometricPrecision; 
     }
     input[id=withbtn] {
-    width: 30vw;
-    height: 15vw;
-    background-color: rgb(194, 50, 45);
-    color: rgb(245, 244, 244);
-    font-weight: bold;
-    font-size: 5vw;
-    padding: 0.5vw;
-    margin: 0.5vw;
-    border: 3vw;
-    border-radius: 0.1vw;
-    cursor: pointer;
+        width: 30vw;
+        height: 15vw;
+        background-color: rgb(194, 50, 45);
+        color: rgb(245, 244, 244);
+        font-weight: bold;
+        font-size: 5vw;
+        padding: 0.5vw;
+        margin: 0.5vw;
+        border: 3vw;
+        border-radius: 0.1vw;
+        cursor: pointer;
     }
     input[id=minbtn] {
-    width: 30vw;
-    height: 15vw;
-    background-color: rgb(142, 145, 131);
-    color: rgb(17, 16, 16);
-    font-weight: bold;
-    font-size: 3vw;
-    padding: 0.5vw;
-    margin: 0.5vw;
-    border: 3vw;
-    border-radius: 0.1vw;
-    cursor: pointer;
-    }
-    input[type=submit] {
-    width: 30vw;
-    height: 15vw;
-    background-color: rgb(180, 207, 214);
-    color: rgb(26, 22, 22);
-    font-weight: bold;
-    font-size: 5vw;
-    padding: 0.2vw;
-    margin: 0.1vw;
-    border: none;
-    border-radius: 0.2vw;
-    cursor: pointer;
+        width: 30vw;
+        height: 15vw;
+        background-color: rgb(142, 145, 131);
+        color: rgb(17, 16, 16);
+        font-weight: bold;
+        font-size: 3vw;
+        padding: 0.5vw;
+        margin: 0.5vw;
+        border: 3vw;
+        border-radius: 0.1vw;
+        cursor: pointer;
     }
     pre {
-    font-size: 3.5vw;
-    font-weight: bold;
-    text-align: center;
-
+        font-size: 3.5vw;
+        font-weight: bold;
+        text-align: center;
     }
 
 </style>
@@ -108,29 +94,36 @@ My Page
             <input type = "button" id="depbtn" value= "DEPOSIT" onclick="transaction.deposit()" />
             <input type="button" id="withbtn" value="WITHDRAW" onclick="transaction.withdraw()" /><br />
             <input type="button" id="minbtn" value="MINI-STATEMENT" onclick="transaction.miniStatement()" />
-            <br />  <hr /><input type="submit" value="REFRESH" /><br />
+            <br />
             <pre id= "mes">
 
             </pre>
             <script>
+            
+            
 			class Bank{
                 constructor(){
-                    this.username = document.getElementById("usr").value;
-                    this.password = document.getElementById("pwd").value;
                     this.users = [];
                 }
                 register(){
-                    if(this.username != null && this.password != null){
-                        let user = {username: this.username, password: this.password};
-                        this.users.unshift(user);
-                        alert("registered");
-                    }else{
-                        alert("Please register again");
-                    }
+                    let registeredUsername = document.getElementById('usr').value;
+                    let registeredPassword = document.getElementById('pwd').value;
+					let user = {username: registeredUsername, password: registeredPassword};
+                    this.users.unshift(user);
+                    alert("registered");
+                    console.log(this.users);
+                        
                 }
                 login(){
-                    this.users.includes(this.username) && this.users.includes(this.password);
+                    let loggedUsername = document.getElementById('usr').value;
+                    let loggedPassword = document.getElementById('pwd').value;
+                    let loggedUser = {username: loggedUsername, password: loggedPassword};
+                    console.log(loggedUser);
+                    if(this.users.some(loggedUser => (loggedUser.username === loggedUsername && loggedUser.password === loggedPassword))){
                         alert("Logged In");
+                    } else{
+                        alert("Please try again");
+                    }
                 }
                 
 
@@ -153,7 +146,7 @@ My Page
                 }
                 deposit(){
                     let deposited = Number(document.getElementById("inp").value);
-                        if(deposited>0){
+                        if(deposited>99){
                                 if (deposited<1000000){
                                     this.balance += deposited;
                                     let sdring = { transactionId: this.makeid(10), time : new Date(), depositAmount: deposited, currentBalance: this.balance};
@@ -168,13 +161,13 @@ My Page
                                 }
                         }
                         else{
-                            alert("You cannot deposit a Negative Amount");
+                            alert("You cannot deposit less than KES 100");
                             document.forms[0].reset();
                         }
                     }
                 withdraw(){
                 let withdrawn = Number(document.getElementById("inp").value);
-                    if (withdrawn>0){
+                    if (withdrawn>99){
                             if (withdrawn < 1000000 && withdrawn>0) {
                                 if (this.balance > withdrawn) {
                                     this.balance = this.balance - withdrawn;
@@ -193,7 +186,7 @@ My Page
                                 alert( "You cannot withdraw a million shillings or more");
                                 document.forms[0].reset();
                             }
-                    }else{ alert("You cannot withdraw a negative amount");
+                    }else{ alert("You cannot withdraw less than KES 100 ");
                         document.forms[0].reset();
                     }
                 }
@@ -205,9 +198,7 @@ My Page
             var user = new Bank();
             var transaction = new Account();
 
-
-
-            </script>
+			</script>
                
         </form>
 
