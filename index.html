@@ -44,7 +44,7 @@
                 width: 20vw;
                 border-radius: 1vw
             }
-            input[id=usr]{
+            input[id=user]{
                 height: 10vw;
                 width: 30vw;
                 font-size: 5vw;
@@ -52,7 +52,7 @@
                 text-align: center;
                 border-radius: 1vw
             }
-            input[id=pwd]{
+            input[id=pswd]{
                 height: 10vw;
                 width: 30vw;
                 font-size: 5vw;
@@ -153,8 +153,8 @@
         <div>
             <form>
                 <span id="frm"></span><br />
-                <input type="text" id="usr" required="required" placeholder ="Username"/>
-                <input type="password" id="pwd" required="required" placeholder="Password"/> <br /> <br />
+                <input type="text" id="user" required="required" placeholder ="Username"/>
+                <input type="password" id="pswd" required="required" placeholder="Password"/> <br /> <br />
                 <input type="button" id="register" value = "REGISTER" onclick="transaction.register()" />
                 <input type="button" id="login" value= "LOGIN" onclick="transaction.login()"/>
                 <input type="button" id="logout" value= "LOGOUT" onclick="transaction.logout()"/><br /><br/>
@@ -169,14 +169,16 @@
                     class Bank{
                         constructor(){
                             this.users = [];
-                            this.username = usr;
-                            this.password = pwd;
+                            this.rusername = "usr";
+                            this.rpassword = "pwd";
+                            this.lusername = "usr";
+                            this.lpassword = "pwd";
                         }
                         register(){
-                            this.username = document.getElementById('usr').value;
-                            this.password = document.getElementById('pwd').value;
-                            let user = {username: this.username, password: this.password};
-                            if (this.username.length !== 0 && this.password.length !== 0){
+                            this.rusername = document.getElementById('user').value;
+                            this.rpassword = document.getElementById('pswd').value;
+                            let user = {username: this.rusername, password: this.rpassword};
+                            if (this.rusername.length !== 0 && this.rpassword.length !== 0){
                                 this.users.unshift(user);
                                 alert("registered");
                                 this.login();
@@ -188,16 +190,16 @@
                             }    
                         }
                         login(){
-                            this.username = document.getElementById('usr').value;
-                            this.password = document.getElementById('pwd').value;
-                            let loggedUser = {username: this.username, password: this.password};
-                            if (this.username.length == 0 && this.password.length == 0){
+                            this.lusername = document.getElementById('user').value;
+                            this.lpassword = document.getElementById('pswd').value;
+                            let loggedUser = {username: this.lusername, password: this.lpassword};
+                            if (this.lusername.length == 0 && this.lpassword.length == 0){
                                 alert ("Register Or Log In");
-                            }else if (this.username.length == 0 || this.password.length == 0){
+                            }else if (this.lusername.length == 0 || this.lpassword.length == 0){
                                 alert("Invalid Credentials");
-                            }else if(this.users.some(loggedUser => (this.username === this.username && this.password === this.password))){
+                            }else if(this.users.some(loggedUser => (this.lusername === this.rusername && this.lpassword === this.rpassword))){
                                 alert("Logged In");
-                                document.getElementById('frm').textContent = this.username.toUpperCase();	
+                                document.getElementById('frm').textContent = this.lusername.toUpperCase();	
                                 document.forms[0].reset();
                             }
                             else{
