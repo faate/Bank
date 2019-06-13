@@ -1,208 +1,310 @@
 <html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<style>
-    div {
-        background-color: #0076bc;
-        border: 1vw solid rgb(34, 87, 34);
-        padding: 5vw;
-        margin: 2vw;
-    }
-    form {
-        text-align: center;
-    }
-    input[id=usr]{
-        height: 3vw;
-        width: 15vw;
-    }
-    input[id=pwd]{
-        height: 3vw;
-        width: 15vw;
-    }
-    input[type=number]{
-        width: 50vw;
-        height: 10vw;
-        padding: 0.5vw 0.5vw;
-        font-size: 10vw;
-        margin: 0.2vw 0.1vw;
-        display: inline-block;
-        border: 0.5vw solid #ccc;
-        border-radius: 0.5vw;
-        box-sizing: border-box;
-    }
-    input[id=depbtn] {
-        width: 30vw;
-        height: 15vw;
-        background-color: #4CAF50;
-        color: rgb(5, 12, 0);
-        font-weight: bold;
-        font-size: 5vw;
-        padding: 0.5vw;
-        margin: 0.5vw;
-        border: 3vw;
-        border-radius: 0.1vw;
-        cursor: pointer;
-        text-rendering: geometricPrecision; 
-    }
-    input[id=withbtn] {
-        width: 30vw;
-        height: 15vw;
-        background-color: rgb(194, 50, 45);
-        color: rgb(245, 244, 244);
-        font-weight: bold;
-        font-size: 5vw;
-        padding: 0.5vw;
-        margin: 0.5vw;
-        border: 3vw;
-        border-radius: 0.1vw;
-        cursor: pointer;
-    }
-    input[id=minbtn] {
-        width: 30vw;
-        height: 15vw;
-        background-color: rgb(142, 145, 131);
-        color: rgb(17, 16, 16);
-        font-weight: bold;
-        font-size: 3vw;
-        padding: 0.5vw;
-        margin: 0.5vw;
-        border: 3vw;
-        border-radius: 0.1vw;
-        cursor: pointer;
-    }
-    pre {
-        font-size: 3.5vw;
-        font-weight: bold;
-        text-align: center;
-    }
-
-</style>
-<title>
-My Page
-</title>
-</head>
-<body>
-    <div>
-        <form>
-            <input type="text" id="usr" />
-            <input type="password" id="pwd" /> <br />
-            <input type="button" id="register" value = "REGISTER" onclick="user.register()"/>
-            <input type="button" id="login" value= "LOGIN" onclick="user.login()"/><br />
-            <input type="number" placeholder="KES...." id="inp" /><br />
-            <input type = "button" id="depbtn" value= "DEPOSIT" onclick="transaction.deposit()" />
-            <input type="button" id="withbtn" value="WITHDRAW" onclick="transaction.withdraw()" /><br />
-            <input type="button" id="minbtn" value="MINI-STATEMENT" onclick="transaction.miniStatement()" />
-            <br />
-            <pre id= "mes">
-
-            </pre>
-            <script>
-            
-            
-			class Bank{
-                constructor(){
-                    this.users = [];
-                }
-                register(){
-                    let registeredUsername = document.getElementById('usr').value;
-                    let registeredPassword = document.getElementById('pwd').value;
-					let user = {username: registeredUsername, password: registeredPassword};
-                    this.users.unshift(user);
-                    alert("registered");
-                    console.log(this.users);
-                        
-                }
-                login(){
-                    let loggedUsername = document.getElementById('usr').value;
-                    let loggedPassword = document.getElementById('pwd').value;
-                    let loggedUser = {username: loggedUsername, password: loggedPassword};
-                    console.log(loggedUser);
-                    if(this.users.some(loggedUser => (loggedUser.username === loggedUsername && loggedUser.password === loggedPassword))){
-                        alert("Logged In");
-                    } else{
-                        alert("Please try again");
-                    }
-                }
-                
-
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <style>
+            div {
+                background-color: #0076bc;
+                border: 1vw solid rgb(34, 87, 34);
+                padding: 5vw;
+                margin: 2vw;
+            border-radius: 1vw
             }
-            class Account extends Bank {
-                constructor(){
-                    super();
-                    this.balance = 10000;
-                    this.logs = [];
+            form {
+                text-align: center;
+            }
+            span[id=frm]{
+                color: white;
+                font-size: 7vw;
+                font-family: "Lucida Console", Monaco, monospace;
+                text-align: center;	
+            }
+            input[id=register]{
+                height: 10vw;
+                text-align:center;
+                font-size: 3.7vw;
+                font-family: "Lucida Console", Monaco, monospace;
+                width: 23vw;
+                border-radius: 1vw
+            }
+            input[id=login]{
+                height: 10vw;
+                text-align:center;
+                font-size: 3.7vw;
+                font-family: "Lucida Console", Monaco, monospace;
+                width: 20vw;
+                border-radius: 1vw
+            }
+            input[id=logout]{
+                height: 10vw;
+                text-align:center;
+                font-size: 3.7vw;
+                font-family: "Lucida Console", Monaco, monospace;
+                width: 20vw;
+                border-radius: 1vw
+            }
+            input[id=usr]{
+                height: 10vw;
+                width: 30vw;
+                font-size: 5vw;
+                font-family: "Lucida Console", Monaco, monospace;
+                text-align: center;
+                border-radius: 1vw
+            }
+            input[id=pwd]{
+                height: 10vw;
+                width: 30vw;
+                font-size: 5vw;
+                font-family: "Lucida Console", Monaco, monospace;
+                text-align: center;
+                border-radius: 1vw
+            }
+            input[type=number]{
+                width: 50vw;
+                height: 12.5vw;
+                padding: 0.5vw 0.5vw;
+                font-size: 10vw;
+                font-family: "Lucida Console", Monaco, monospace;
+                text-align: center;
+                margin: 0.2vw 0.1vw;
+                display: inline-block;
+                border: 0.5vw solid #ccc;
+                border-radius: 1vw;
+                box-sizing: border-box;
+            }
+            input[id=depbtn] {
+                width: 30vw;
+                height: 15vw;
+                background-color: #4CAF50;
+                color: rgb(5, 12, 0);
+                font-weight: bold;
+                font-size: 5vw;
+                font-family: "Lucida Console", Monaco, monospace;
+                padding: 0.5vw;
+                margin: 0.5vw;
+                border: 3vw;
+                border-radius: 1vw;
+                cursor: pointer; 
+            }
+            input[id=withbtn] {
+                width: 30vw;
+                height: 15vw;
+                background-color: rgb(194, 50, 45);
+                color: rgb(245, 244, 244);
+                font-weight: bold;
+                font-size: 5vw;
+                font-family: "Lucida Console", Monaco, monospace;
+                padding: 0.5vw;
+                margin: 0.5vw;
+                border: 3vw;
+                border-radius: 1vw;
+                cursor: pointer;
+            }
+            input[id=minbtn] {
+                width: 30vw;
+                height: 15vw;
+                background-color: rgb(142, 145, 131);
+                color: rgb(17, 16, 16);
+                font-weight: bold;
+                font-size: 3vw;
+                font-family: "Lucida Console", Monaco, monospace;
+                padding: 0.5vw;
+                margin: 0.5vw;
+                border: 3vw;
+                border-radius: 1vw;
+                cursor: pointer;
+            }
+            input[id=chkbal] {
+                width: 30vw;
+                height: 15vw;
+                background-color: black;
+                color: white;
+                font-weight: bold;
+                font-size: 3vw;
+                font-family: "Lucida Console", Monaco, monospace;
+                padding: 0.5vw;
+                margin: 0.5vw;
+                border: 3vw;
+                border-radius: 1vw;
+                cursor: pointer;
+            }
+            input[id=loan] {
+                width: 30vw;
+                height: 15vw;
+                background-color: #D2691E;
+                color: white;
+                font-weight: bold;
+                font-size: 3vw;
+                font-family: "Lucida Console", Monaco, monospace;
+                padding: 0.5vw;
+                margin: 0.5vw;
+                border: 3vw;
+                border-radius: 1vw;
+                cursor: pointer;
+            }
 
-                }
-                makeid(length){
-                    var result = '';
-                    var characters = 'QWERTYUIOPASDFGHJKLZXCVBNM017258369';
-                    var charactersLength = characters.length;
-                    for (var i=0;i<length; i++){
-                    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-                }
-                return result;
-                }
-                deposit(){
-                    let deposited = Number(document.getElementById("inp").value);
-                        if(deposited>99){
-                                if (deposited<1000000){
-                                    this.balance += deposited;
-                                    let sdring = { transactionId: this.makeid(10), time : new Date(), depositAmount: deposited, currentBalance: this.balance};
-                                    this.logs.unshift(sdring);
-                                    document.forms[0].reset();
-                                    let mess = document.getElementById('mes');
-                                    mess.textContent = ('\n' + JSON.stringify(sdring, '\t', 2));
-                                }
-                                else{
-                                    alert(" And You cannot deposit a Million or more shillings");
-                                    document.forms[0].reset();
-                                }
+        </style>
+        <title>
+        My Page
+        </title>
+    </head>
+    <body>
+        <div>
+            <form>
+                <span id="frm"></span><br />
+                <input type="text" id="usr" required="required" placeholder ="Username"/>
+                <input type="password" id="pwd" required="required" placeholder="Password"/> <br /> <br />
+                <input type="button" id="register" value = "REGISTER" onclick="transaction.register()" />
+                <input type="button" id="login" value= "LOGIN" onclick="transaction.login()"/>
+                <input type="button" id="logout" value= "LOGOUT" onclick="transaction.logout()"/><br /><br/>
+                <input type="number" placeholder="KES" id="inp" /><br /><br />
+                <input type = "button" id="depbtn" value= "DEPOSIT" onclick="transaction.deposit()" />
+                <input type="button" id="withbtn" value="WITHDRAW" onclick="transaction.withdraw()" /><br /><br />
+                <input type="button" id="minbtn" value="MINI-STATEMENT" onclick="transaction.miniStatement()" />
+                <input type="button" id="chkbal" value="BALANCE" onclick="transaction.checkBalance()" /><br /><br />
+                <input type="button" id="loan" value="LOAN" onclick="transaction.borrowCash()" />
+                    <br />
+                <script>
+                    class Bank{
+                        constructor(){
+                            this.users = [];
+                            this.username = user;
+                            this.password = pass;
                         }
-                        else{
-                            alert("You cannot deposit less than KES 100");
-                            document.forms[0].reset();
-                        }
-                    }
-                withdraw(){
-                let withdrawn = Number(document.getElementById("inp").value);
-                    if (withdrawn>99){
-                            if (withdrawn < 1000000 && withdrawn>0) {
-                                if (this.balance > withdrawn) {
-                                    this.balance = this.balance - withdrawn;
-                                    let sdring = {transactionId: this.makeid(10), time : new Date(),withdrawnAmount: withdrawn, currentBalance: this.balance};
-                                    this.logs.unshift(sdring);
-                                    document.forms[0].reset();
-                                    let mess = document.getElementById('mes');
-                                    mess.textContent = ('\n' + JSON.stringify(sdring, '\t', 2));
-                                }
-                                else{
-                                    alert( "You cannot withdraw more than you have in your account");
-                                    document.forms[0].reset();
-                                }
-                                
-                            }else{
-                                alert( "You cannot withdraw a million shillings or more");
+                        register(){
+                            this.username = document.getElementById('usr').value;
+                            this.password = document.getElementById('pwd').value;
+                            let user = {username: this.username, password: this.password};
+                            if (this.username.length !== 0 && this.password.length !== 0){
+                                this.users.unshift(user);
+                                alert("registered");
+                                this.login();
+                                console.log(this.users);
                                 document.forms[0].reset();
                             }
-                    }else{ alert("You cannot withdraw less than KES 100 ");
-                        document.forms[0].reset();
+                            else{
+                                alert("Please enter valid username and password");
+                            }    
+                        }
+                        login(){
+                            this.username = document.getElementById('usr').value;
+                            this.password = document.getElementById('pwd').value;
+                            let loggedUser = {username: this.username, password: this.password};
+                            if (this.username.length == 0 && this.password.length == 0){
+                                alert ("Register Or Log In");
+                            }else if (this.username.length == 0 || this.password.length == 0){
+                                alert("Invalid Credentials");
+                            }else if(this.users.some(loggedUser => (this.username === this.username && this.password === this.password))){
+                                alert("Logged In");
+                                document.getElementById('frm').textContent = this.username.toUpperCase();	
+                                document.forms[0].reset();
+                            }
+                            else{
+                                alert("Please Register Again");
+                            }
+                        }
+                        logout(){
+                            document.getElementById('frm').textContent = "";
+                        }
                     }
-                }
-                miniStatement(){
-                    let miniState = document.querySelector("pre");
-                    miniState.textContent = ('\n' + JSON.stringify(this.logs.slice(0,5), '\t', 2));
+                    class Account extends Bank {
+                        constructor(){
+                            super();
+                            this.users = [];
+                            this.balance = 10000;
+                            this.logs = [];
+                            this.date = new Date();
+
+                        }
+                        makeid(length){
+                            var result = '';
+                            var characters = 'QWERTYUIOPASDFGHJKLZXCVBNM017258369';
+                            var charactersLength = characters.length;
+                            for (var i=0;i<length; i++){
+                            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+                        }
+                        return result;
+                        }
+                        deposit(){
+                            let deposited = Number(document.getElementById("inp").value);
+                            if(document.getElementById('frm').textContent == 0){
+                                this.login();
+                            }else if(deposited < 99){
+                                alert("You cannot deposit less than KES 100");
+                                document.forms[0].reset();
+                            }else if(deposited>1000000){
+                                alert("You cannot deposit a Million or more shillings");
+                                document.forms[0].reset();
+                            }else{
+                                this.balance += deposited;
+                                let transObj = {transactionId: this.makeid(10), time: this.date, withdrawnAmount: deposited, balance: this.balance};
+                                let mess = ('\n' + "Transaction ID : " +  transObj.transactionId + '\n' + "Time : " + transObj.time + '\n' + "Deposited : " + deposited + '\n' + "Current Balance : " + this.balance);
+                                alert(mess);
+                                this.logs.unshift(transObj);
+                                document.forms[0].reset();
+                                }
+                        }
+                        withdraw(){
+                            let withdrawn = Number(document.getElementById("inp").value);
+                            if(document.getElementById('frm').textContent == 0){
+                                this.login();
+                            }else if (withdrawn<99){
+                                alert("You cannot withdraw less than KES 100");
+                                document.forms[0].reset();
+                            }else if (this.balance < withdrawn){
+                                alert("You cannot withdraw more than you have in your account");
+                                document.forms[0].reset();
+                            }else if (withdrawn > 1000000){
+                                alert( "You cannot withdraw a million shillings or more");
+                                document.forms[0].reset();
+                            }else{
+                                this.balance = this.balance - withdrawn;
+                                let transObj = {transactionId: this.makeid(10), time: this.date, withdrawnAmount: withdrawn, balance: this.balance};
+                                let mess = ("Transaction ID : " + transObj.transactionId  + '\n' + "Time : " + transObj.time + '\n' + "Withdrawn : " + withdrawn + '\n' + "Current Balance : " + this.balance);
+                                alert(mess);
+                                this.logs.unshift(transObj);
+                                document.forms[0].reset();
+                                }
+                        
+                        }
+                        miniStatement(){
+                            if(document.getElementById('frm').textContent == 0){
+                            this.login();
+                            }else{
+                                alert('\n' + JSON.stringify(this.logs.slice(0,5), '\t', 2));
+                            }
+                        }
+                        checkBalance(){
+                            if(document.getElementById('frm').textContent == 0){
+                            this.login();
+                            }else{
+                            alert("KES "+ this.balance);
+                            }
+                        }
+                        borrowCash(){
+                            let borrow = Number(document.getElementById("inp").value);
+                            if(document.getElementById('frm').textContent == 0){
+                                this.login();
+                            }else if (borrow == 0){
+                                alert("You have not borrowed any amount");
+                            }else if (borrow > 100001){
+                                alert("You cannot borrow more than KES 100000");
+                                document.forms[0].reset;
+                            }else{
+                                this.balance += borrow;
+                                let transObj = {transactionId: this.makeid(10), time: this.date, LoanAmount: borrow, balance: this.balance};
+                                let mess = ("Transaction ID : " + transObj.transactionId + '\n' + "You Borrowed " + borrow + '\n' + "Time : " + transObj.time + '\n' + " Current balance " + this.balance + '\t', 2);
+                                alert (mess);
+                                this.logs.unshift(transObj);
+                                document.forms[0].reset();
+                            }
+                        }
                     }
-            };
-            var user = new Bank();
-            var transaction = new Account();
+                    var transaction = new Account();
 
-			</script>
-               
-        </form>
-
-    </div>
-
-</body>
+                </script>
+            </form>
+        </div>
+    </body>
 </html>
