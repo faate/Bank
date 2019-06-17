@@ -1,0 +1,399 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <style>
+            div {
+                background-color: #0076bc;
+                border: 1vw solid rgb(34, 87, 34);
+                padding: 5vw;
+                margin: 2vw;
+            border-radius: 1vw
+            }
+            form {
+                text-align: center;
+            }
+            span[id=frm]{
+                color: white;
+                font-size: 7vw;
+                font-family: "Lucida Console", Monaco, monospace;
+                text-align: center;	
+            }
+            input[id=register]{
+                height: 10vw;
+                text-align:center;
+                font-size: 3.7vw;
+                font-family: "Lucida Console", Monaco, monospace;
+                width: 25vw;
+                border-radius: 1vw
+            }
+            input[id=login]{
+                height: 10vw;
+                text-align:center;
+                font-size: 3.7vw;
+                font-family: "Lucida Console", Monaco, monospace;
+                width: 20vw;
+                border-radius: 1vw
+            }
+            input[id=logout]{
+                height: 10vw;
+                text-align:center;
+                font-size: 3.7vw;
+                font-family: "Lucida Console", Monaco, monospace;
+                width: 20vw;
+                border-radius: 1vw
+            }
+            input[id=user]{
+                height: 10vw;
+                width: 30vw;
+                font-size: 5vw;
+                font-family: "Lucida Console", Monaco, monospace;
+                text-align: center;
+                border-radius: 1vw
+            }
+            input[id=pswd]{
+                height: 10vw;
+                width: 30vw;
+                font-size: 5vw;
+                font-family: "Lucida Console", Monaco, monospace;
+                text-align: center;
+                border-radius: 1vw
+            }
+            input[type=number]{
+                width: 50vw;
+                height: 12.5vw;
+                padding: 0.5vw 0.5vw;
+                font-size: 10vw;
+                font-family: "Lucida Console", Monaco, monospace;
+                text-align: center;
+                margin: 0.2vw 0.1vw;
+                display: inline-block;
+                border: 0.5vw solid #ccc;
+                border-radius: 1vw;
+                box-sizing: border-box;
+            }
+            input[id=depbtn] {
+                width: 30vw;
+                height: 15vw;
+                background-color: #4CAF50;
+                color: rgb(5, 12, 0);
+                font-weight: bold;
+                font-size: 5vw;
+                font-family: "Lucida Console", Monaco, monospace;
+                padding: 0.5vw;
+                margin: 0.5vw;
+                border: 3vw;
+                border-radius: 1vw;
+                cursor: pointer; 
+            }
+            input[id=withbtn] {
+                width: 30vw;
+                height: 15vw;
+                background-color: rgb(194, 50, 45);
+                color: rgb(245, 244, 244);
+                font-weight: bold;
+                font-size: 5vw;
+                font-family: "Lucida Console", Monaco, monospace;
+                padding: 0.5vw;
+                margin: 0.5vw;
+                border: 3vw;
+                border-radius: 1vw;
+                cursor: pointer;
+            }
+            input[id=minbtn] {
+                width: 30vw;
+                height: 15vw;
+                background-color: rgb(142, 145, 131);
+                color: rgb(17, 16, 16);
+                font-weight: bold;
+                font-size: 3vw;
+                font-family: "Lucida Console", Monaco, monospace;
+                padding: 0.5vw;
+                margin: 0.5vw;
+                border: 3vw;
+                border-radius: 1vw;
+                cursor: pointer;
+            }
+            input[id=chkbal] {
+                width: 30vw;
+                height: 15vw;
+                background-color: black;
+                color: white;
+                font-weight: bold;
+                font-size: 3vw;
+                font-family: "Lucida Console", Monaco, monospace;
+                padding: 0.5vw;
+                margin: 0.5vw;
+                border: 3vw;
+                border-radius: 1vw;
+                cursor: pointer;
+            }
+            input[id=loan] {
+                width: 30vw;
+                height: 15vw;
+                background-color: #D2691E;
+                color: white;
+                font-weight: bold;
+                font-size: 3vw;
+                font-family: "Lucida Console", Monaco, monospace;
+                padding: 0.5vw;
+                margin: 0.5vw;
+                border: 3vw;
+                border-radius: 1vw;
+                cursor: pointer;
+            }
+			.modal {
+			  display: none;
+			  position: fixed; 
+			  z-index: 1;
+			  left: 0;
+			  top: 0;
+			  width: 100%;
+			  height: 100%; 
+			  overflow: auto; 
+			  background-color: rgb(0,0,0);
+			  background-color: rgba(0,0,0,0.4);
+			}
+			.modal-content {
+			  background-color: #fefefe;
+			  margin: 15% auto; 
+			  padding: 20px;
+			  border: 1px solid #888;
+			  width: 80%; 
+			}
+			.close {
+			  color: #aaa;
+			  float: right;
+			  font-size: 28px;
+			  font-weight: bold;
+			}
+			.close:hover,
+			.close:focus {
+			  color: black;
+			  text-decoration: none;
+			  cursor: pointer;
+			} 
+        </style>
+        <title>
+        My Page
+        </title>
+    </head>
+    <body>
+        <div>
+            <form>
+                <span id="frm"></span><br />
+                <input type="text" id="user" required="required" placeholder ="Username"/>
+                <input type="password" id="pswd" required="required" placeholder="Password"/> <br /> <br />
+                <input type="button" id="register" value = "REGISTER" onclick="transaction.register()" />
+                <input type="button" id="login" value= "LOGIN" onclick="transaction.login()"/>
+                <input type="button" id="logout" value= "LOGOUT" onclick="transaction.logout()"/><br /><br/>
+                <input type="number" placeholder="KES" id="inp" /><br /><br />
+                <input type = "button" id="depbtn" value= "DEPOSIT" onclick="transaction.deposit()" />
+                <input type="button" id="withbtn" value="WITHDRAW" onclick="transaction.withdraw()" /><br /><br />
+                <input type="button" id="minbtn" value="MINI-STATEMENT" onclick="transaction.miniStatement()" />
+                <input type="button" id="chkbal" value="BALANCE" onclick="transaction.checkBalance()" /><br /><br />
+                <input type="button" id="loan" value="LOAN" onclick="transaction.borrowCash()" />
+				<input type="button" id="loan" value="ADMIN" onclick="transaction.checkUserAccounts()" />;
+				 <br />
+				 <button id="myBtn">Open Modal</button>
+				<div id="myModal" class="modal">
+					<div class="modal-content">
+					<span class="close">&times;</span>
+					<p id ="msg"></p>
+				  </div>
+
+				</div>
+                <script>
+					var modal = document.getElementById("myModal");
+					var btn = document.getElementById("myBtn");
+					var span = document.getElementsByClassName("close")[0];
+					btn.onclick = function() {
+					  modal.style.display = "block";
+					}
+					span.onclick = function() {
+					  modal.style.display = "none";
+					}
+					window.onclick = function(event) {
+					  if (event.target == modal) {
+						modal.style.display = "none";
+					  }
+					}
+                    class Bank{
+                        constructor(){
+                            this.users = [];
+                            this.rusername = "";
+                            this.rpassword = "";
+                            this.nwusername ="";
+                            this.nwpassword = "";
+                            this.lusername = "";
+                            this.lpassword = "";
+                            this.loggedUser = "";
+							this.userAccounts = [];
+                        }
+                        register(){
+                            this.nwusername = document.getElementById('user').value;
+                            this.nwpassword = document.getElementById('pswd').value;
+                            
+                            if(document.getElementById('frm').textContent !== ""){
+                             document.getElementById('msg').textContent = "Please Log Out";
+                            }else if(this.nwpassword.length == 0 && this.nwpassword.length == 0){
+							 
+                             document.getElementById('msg').textContent = "Please enter a valid username and password";
+                            }else if(this.users.some( user => (this.nwusername === this.rusername))){
+                                alert("User already exists");
+                                document.forms[0].reset();
+                            }else{
+                                this.rusername = this.nwusername;
+                                this.rpassword = this.nwpassword;
+                                let user = {username: this.rusername, password: this.rpassword};
+								this.users.unshift(user);
+                                alert("registered");
+                                this.login();
+                                document.forms[0].reset();
+                            }    
+                        }
+                        login(){
+                            this.lusername = document.getElementById('user').value;
+                            this.lpassword = document.getElementById('pswd').value;
+                            
+                            if (document.getElementById('frm').textContent !== ""){
+                                alert("Please Log Out First");
+                                document.forms[0].reset();
+                            }else if (this.lusername.length == 0 && this.lpassword.length == 0){
+                                alert("Please enter valid username and password");
+                            }else if (this.lusername.length == 0 || this.lpassword.length == 0){
+                                alert("Invalid Credentials");
+                            }else if(this.users.some(loggedUser => (this.lusername === this.rusername && this.lpassword === this.rpassword))){
+                                alert("Logged In");
+                                document.getElementById('frm').textContent = this.lusername.toUpperCase();	
+                                this.loggedUser = {username: this.lusername ,statement : []};
+								this.userAccounts.unshift(this.loggedUser);
+                                document.forms[0].reset;
+                                console.log(this.users);
+                            }
+                            else{
+                                alert("Please Register Again");
+                            }
+                        }
+                        logout(){
+                            alert(document.getElementById("frm").textContent + " Logged Out");
+                            document.getElementById('frm').textContent = "";
+                            document.forms[0].reset();
+                        }
+                    }
+                    class Account extends Bank {
+                        constructor(){
+                            super();
+                            this.users = [];
+							this.loggedUser = [];
+                            this.balance = 10000;
+                            this.statement = [];
+                            this.date = new Date();
+
+                        }
+                        makeid(length){
+                            var result = '';
+                            var characters = 'QWERTYUIOPASDFGHJKLZXCVBNM017258369';
+                            var charactersLength = characters.length;
+                            for (var i=0;i<length; i++){
+                            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+                            }
+                                return result;
+                        }
+                        deposit(){
+                            let deposited = Number(document.getElementById("inp").value);
+                            if(document.getElementById('frm').textContent == ""){
+                                this.login();
+                                document.forms[0].reset();
+                            }else if(deposited < 99){
+                                alert("You cannot deposit less than KES 100");
+                                document.forms[0].reset();
+                            }else if(deposited>1000000){
+                                alert("You cannot deposit a Million or more shillings");
+                                document.forms[0].reset();
+                            }else{
+                                this.balance += deposited;
+                                let transObj = {transactionId: this.makeid(10), time: this.date, withdrawnAmount: deposited, balance: this.balance};
+                                let mess = ('\n' + "Transaction ID : " +  transObj.transactionId + '\n' + "Time : " + transObj.time + '\n' + "Deposited : " + deposited + '\n' + "Current Balance : " + this.balance);
+                                alert(mess);
+                                this.loggedUser.statement.unshift(transObj);
+								this.userAccounts.unshift(this.loggedUser);
+                                document.forms[0].reset();
+                                }
+                        }
+                        withdraw(){
+                            let withdrawn = Number(document.getElementById("inp").value);
+                            if(document.getElementById('frm').textContent == ""){
+                                this.login();
+                                document.forms[0].reset();
+                            }else if (withdrawn<99){
+                                alert("You cannot withdraw less than KES 100");
+                                document.forms[0].reset();
+                            }else if (this.balance < withdrawn){
+                                alert("You cannot withdraw more than you have in your account");
+                                document.forms[0].reset();
+                            }else if (withdrawn > 1000000){
+                                alert( "You cannot withdraw a million shillings or more");
+                                document.forms[0].reset();
+                            }else{
+                                this.balance = this.balance - withdrawn;
+                                let transObj = {transactionId: this.makeid(10), time: this.date, withdrawnAmount: withdrawn, balance: this.balance};
+                                let mess = ("Transaction ID : " + transObj.transactionId  + '\n' + "Time : " + transObj.time + '\n' + "Withdrawn : " + withdrawn + '\n' + "Current Balance : " + this.balance);
+                                alert(mess);
+                                this.loggedUser.statement.unshift(transObj);
+								this.userAccounts.unshift(this.loggedUser);
+                                document.forms[0].reset();
+                                }
+                        
+                        }
+                        miniStatement(){
+                            if(document.getElementById('frm').textContent == ""){
+                            this.login();
+                            }else{
+								alert('\n' + JSON.stringify(this.loggedUser.statement, '\t', 2));
+                            }
+                        }
+                        checkBalance(){
+                            if(document.getElementById('frm').textContent == ""){
+                            this.login();
+                            }else{
+                            alert("KES "+ this.balance);
+                            document.forms[0].reset();
+                            }
+                        }
+                        borrowCash(){
+                            let borrow = Number(document.getElementById("inp").value);
+                            if (document.getElementById('frm').textContent == ""){
+                                this.login();
+                                document.forms[0].reset();
+                            }else if (borrow == 0){
+                                alert("You have not borrowed any amount");
+                                document.forms[0].reset();
+                                
+                            }else if(borrow > 100001){
+                                alert("You cannot borrow more than KES 100000");
+                                document.forms[0].reset;
+                                
+                            }else{
+                                this.balance += borrow;
+                                let transObj = {transactionId: this.makeid(10), time: this.date, LoanAmount: borrow, balance: this.balance};
+                                let mess = ("Transaction ID : " + transObj.transactionId + "\n" + "You Borrowed " + borrow + "\n" + "Time : " + transObj.time + "\n" + " Current balance " + this.balance + "\t");
+                                alert(mess);
+                                this.loggedUser.statement.unshift(transObj);
+								this.userAccounts.unshift(this.loggedUser);
+                                document.forms[0].reset();
+                            }
+                        }
+						checkUserAccounts(){
+							document.querySelector('pre').textContent = ('\n' + JSON.stringify(this.userAccounts, '\t', 2));
+						}
+                    }
+                    var transaction = new Account();
+					
+                </script>
+				<pre> </pre>
+            </form>
+        </div>
+    </body>
+</html>
