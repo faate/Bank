@@ -185,7 +185,7 @@
                 <span id="frm"></span><br />
                 <input type="text" id="user" required="required" placeholder ="Username"/>
                 <input type="password" id="pswd" required="required" placeholder="Password"/> <br /> <br />
-                <input type="button" id="register" value = "REGISTER" onclick="transaction.register()" />
+                <input type="button" id="register" value = "REGISTER" onclick="transaction.register(),  btn.onclick();" />
                 <input type="button" id="login" value= "LOGIN" onclick="transaction.login()"/>
                 <input type="button" id="logout" value= "LOGOUT" onclick="transaction.logout()"/><br /><br/>
                 <input type="number" placeholder="KES" id="inp" /><br /><br />
@@ -238,10 +238,10 @@
                             if(document.getElementById('frm').textContent !== ""){
                              document.getElementById('msg').textContent = "Please Log Out";
                             }else if(this.nwpassword.length == 0 && this.nwpassword.length == 0){
-							 
+							
                              document.getElementById('msg').textContent = "Please enter a valid username and password";
                             }else if(this.users.some( user => (this.nwusername === this.rusername))){
-                                alert("User already exists");
+                                document.getElementById('msg').textContent = "User already exists";
                                 document.forms[0].reset();
                             }else{
                                 this.rusername = this.nwusername;
@@ -258,10 +258,10 @@
                             this.lpassword = document.getElementById('pswd').value;
                             
                             if (document.getElementById('frm').textContent !== ""){
-                                alert("Please Log Out First");
+                                document.getElementById('msg').textContent = "Please Log Out First";
                                 document.forms[0].reset();
                             }else if (this.lusername.length == 0 && this.lpassword.length == 0){
-                                alert("Please enter valid username and password");
+                                document.getElementById('msg').textContent = "Please enter valid username and password";
                             }else if (this.lusername.length == 0 || this.lpassword.length == 0){
                                 alert("Invalid Credentials");
                             }else if(this.users.some(loggedUser => (this.lusername === this.rusername && this.lpassword === this.rpassword))){
